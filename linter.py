@@ -10,7 +10,6 @@
 
 """This module exports the PHP plugin class."""
 
-import re
 from SublimeLinter.lint import Linter
 
 
