@@ -1,12 +1,12 @@
 SublimeLinter-php
 =========================
 
-This linter plugin for [SublimeLinter](https://github.com/SublimeLinter/SublimeLinter3) provides an interface to [php -l](http://www.php.net/manual/en/features.commandline.options.php). It will be used with files that have the “PHP” syntax, or PHP code embedded in HTML files.
+This linter plugin for [SublimeLinter](https://github.com/SublimeLinter/SublimeLinter3) provides an interface to [php -l](http://www.php.net/manual/en/features.commandline.options.php). It will be used with files that have the “PHP” syntax, or within `<?php ?>` tags in HTML files.
 
 ## Installation
 
 ### Linter installation
-Before installing this plugin, you must ensure that `php` is installed on your system. To install `php`, follow the instructions on the [php website](http://www.php.net/manual/en/install.php).
+Before installing this plugin, you must ensure that `php` is installed on your system. To install `php`, download and run the appropriate installer: [Linux/OS X](http://www.php.net/downloads.php) or [Windows](http://windows.php.net/download/).
 
 Then you can proceed to install the SublimeLinter-php plugin.
 
