@@ -3,4 +3,4 @@ SublimeLinter-php
 
 This linter plugin for SublimeLinter provides an interface to php -l.
 
-For more information, please see https://github.com/Aparajita/SublimeLinter-php.
+For more information, please see https://github.com/SublimeLinter/SublimeLinter-php.
