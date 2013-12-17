@@ -2,8 +2,8 @@
 # linter.py
 # Linter for SublimeLinter3, a code checking framework for Sublime Text 3
 #
-# Written by Ryan Hileman and Aparajita Fishman
-# Copyright (c) 2013 Ryan Hileman and Aparajita Fishman
+# Written by Ryan Hileman, Aparajita Fishman and Anthony Pidden
+# Copyright (c) 2013 Ryan Hileman, Aparajita Fishman and Anthony Pidden
 #
 # License: MIT
 #
@@ -19,17 +19,19 @@ class PHP(Linter):
 
     syntax = ('php', 'html')
     cmd = 'php -l -n -d display_errors=On -d log_errors=Off'
-    regex = r'^Parse error:\s*(?P<type>parse|syntax) error,?\s*(?P<message>.+?)?\s+in - on line (?P<line>\d+)'
-    selectors = {
-        'html': 'source.php.embedded.block.html'
-    }
+    regex = (
+        r'^Parse (?P<error>error):\s*(?P<type>parse|syntax) error,?\s*'
+        r'(?P<message>.+?) in - on line (?P<line>\d+)$'
+    )
 
     def split_match(self, match):
         """Return the components of the error."""
         match, line, col, error, warning, message, near = super().split_match(match)
 
-        # message might be empty, we have to supply a value
-        if match and match.group('type') == 'parse' and not message:
-            message = 'parse error'
+        # Find 'near' to better mark the location of the error
+        import re
+        m = re.search(r"unexpected '(?P<near>.+)'", message)
+        if m:
+            near = m.group('near')
 
         return match, line, col, error, warning, message, near
