@@ -22,16 +22,5 @@ class PHP(Linter):
     cmd = 'php -l -n -d display_errors=On -d log_errors=Off'
     regex = (
         r'^Parse (?P<error>error):\s*(?P<type>parse|syntax) error,?\s*'
-        r'(?P<message>.+?) in - on line (?P<line>\d+)$'
+        r'(?P<message>.+?((?:\')(?P<near>[^\']+)(?:\'.+))) in - on line (?P<line>\d+)$'
     )
-
-    def split_match(self, match):
-        """Return the components of the error."""
-        match, line, col, error, warning, message, near = super().split_match(match)
-
-        # Find 'near' to better mark the location of the error
-        m = re.search(r"unexpected '(?P<near>.+)'", message)
-        if m:
-            near = m.group('near')
-
-        return match, line, col, error, warning, message, near
