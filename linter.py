@@ -21,5 +21,15 @@ class PHP(Linter):
     cmd = 'php -l -n -d display_errors=On -d log_errors=Off'
     regex = (
         r'^Parse (?P<error>error):\s*(?P<type>parse|syntax) error,?\s*'
-        r'(?P<message>.+?((?:\')(?P<near>[^\']+)(?:\'.+))) in - on line (?P<line>\d+)$'
+        r'(?P<message>[^\']+(?P<near>\'.+?\')?.*) in - on line (?P<line>\d+)$'
     )
+
+    def split_match(self, match):
+        """Return the components of the error."""
+        match, line, col, error, warning, message, near = super().split_match(match)
+
+        # message might be empty, we have to supply a value
+        if match and match.group('type') == 'parse' and not message:
+            message = 'parse error'
+
+        return match, line, col, error, warning, message, near
