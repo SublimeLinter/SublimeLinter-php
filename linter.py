@@ -10,7 +10,7 @@
 
 """This module exports the PHP plugin class."""
 
-from SublimeLinter.lint import Linter
+from SublimeLinter.lint import Linter, util
 
 
 class PHP(Linter):
@@ -23,6 +23,7 @@ class PHP(Linter):
         r'^Parse (?P<error>error):\s*(?P<type>parse|syntax) error,?\s*'
         r'(?P<message>(?:unexpected \'(?P<near>[^\']+)\')?.*) in - on line (?P<line>\d+)'
     )
+    error_stream = util.STREAM_STDOUT
 
     def split_match(self, match):
         """Return the components of the error."""
