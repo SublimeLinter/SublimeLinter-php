@@ -20,7 +20,7 @@ class PHP(Linter):
     syntax = ('php', 'html', 'html 5')
     cmd = 'php -l -n -d display_errors=On -d log_errors=Off'
     regex = (
-        r'^Parse (?P<error>error):\s*(?P<type>parse|syntax) error,?\s*'
+        r'^(?:Parse|Fatal) (?P<error>error):(\s*(?P<type>parse|syntax) error,?)?\s*'
         r'(?P<message>(?:unexpected \'(?P<near>[^\']+)\')?.*) in - on line (?P<line>\d+)'
     )
     error_stream = util.STREAM_STDOUT
