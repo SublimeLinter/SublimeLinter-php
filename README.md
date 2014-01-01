@@ -1,10 +1,10 @@
 SublimeLinter-php
 =========================
 
-This linter plugin for [SublimeLinter](https://github.com/SublimeLinter/SublimeLinter3) provides an interface to [php -l](http://www.php.net/manual/en/features.commandline.options.php). It will be used with files that have the “PHP”, “HTML”, or “HTML 5” syntax.
+This linter plugin for [SublimeLinter](http://sublimelinter.readthedocs.org) provides an interface to [php -l](http://www.php.net/manual/en/features.commandline.options.php). It will be used with files that have the “PHP”, “HTML”, or “HTML 5” syntax.
 
 ## Installation
-SublimeLinter 3 must be installed in order to use this plugin. If SublimeLinter 3 is not installed, please follow the instructions [here](https://github.com/SublimeLinter/SublimeLinter.github.io/wiki/Installation).
+SublimeLinter 3 must be installed in order to use this plugin. If SublimeLinter 3 is not installed, please follow the instructions [here](http://sublimelinter.readthedocs.org/en/latest/installation.html).
 
 ### Linter installation
 Before installing this plugin, you must ensure that `php` is installed on your system. To install `php`, download and run the appropriate installer: [Linux/OS X](http://www.php.net/downloads.php) or [Windows](http://windows.php.net/download/).
@@ -21,7 +21,7 @@ To install via Package Control, do the following:
 1. When the plugin list appears, type `php`. Among the entries you should see `SublimeLinter-php`. If that entry is not highlighted, use the keyboard or mouse to select it.
 
 ## Settings
-For general information on how SublimeLinter works with settings, please see [Settings](https://github.com/SublimeLinter/SublimeLinter.github.io/wiki/Settings). For information on generic linter settings, please see [Linter Settings](https://github.com/SublimeLinter/SublimeLinter.github.io/wiki/Linter-Settings).
+For general information on how SublimeLinter works with settings, please see [Settings](http://sublimelinter.readthedocs.org/en/latest/settings.html). For information on generic linter settings, please see [Linter Settings](http://sublimelinter.readthedocs.org/en/latest/linter_settings.html).
 
 ## Contributing
 If you would like to contribute enhancements or fixes, please do the following:
