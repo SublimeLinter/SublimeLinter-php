@@ -9,7 +9,10 @@ SublimeLinter 3 must be installed in order to use this plugin. If SublimeLinter 
 ### Linter installation
 Before installing this plugin, you must ensure that `php` is installed on your system. To install `php`, download and run the appropriate installer: [Linux/OS X](http://www.php.net/downloads.php) or [Windows](http://windows.php.net/download/).
 
-Once php is installed, you can proceed to install the SublimeLinter-php plugin if it is not yet installed.
+### Linter configuration
+In order for `php` to be executed by SublimeLinter, you must ensure that its path is available to SublimeLinter. Before going any further, please read and follow the steps in [“Finding a linter executable”](http://sublimelinter.readthedocs.org/en/latest/troubleshooting.html#finding-a-linter-executable) through “Validating your PATH” in the documentation.
+
+Once `php` is installed and configured, you can proceed to install the SublimeLinter-php plugin if it is not yet installed.
 
 ### Plugin installation
 Please use [Package Control](https://sublime.wbond.net/installation) to install the linter plugin. This will ensure that the plugin will be updated when new versions are available. If you want to install from source so you can modify the source code, you probably know what you are doing so we won’t cover that here.
