@@ -17,7 +17,7 @@ class PHP(Linter):
 
     """Provides an interface to php -l."""
 
-    syntax = ('php', 'html', 'html 5')
+    syntax = ('php', 'html')
     cmd = 'php -l -n -d display_errors=On -d log_errors=Off'
     regex = (
         r'^(?:Parse|Fatal) (?P<error>error):(\s*(?P<type>parse|syntax) error,?)?\s*'
