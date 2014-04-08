@@ -1,7 +1,7 @@
 SublimeLinter-php
 =========================
 
-[![Build Status](https://khancdn.eu/badges.php?service=https%3A%2F%2Ftravis-ci.org%2FSublimeLinter%2FSublimeLinter-php.png%3Fbranch%3Dmaster)](https://travis-ci.org/SublimeLinter/SublimeLinter-php)
+[![Build Status](https://travis-ci.org/SublimeLinter/SublimeLinter-php.svg?branch=master)](https://travis-ci.org/SublimeLinter/SublimeLinter-php)
 
 This linter plugin for [SublimeLinter](http://sublimelinter.readthedocs.org) provides an interface to [php -l](http://www.php.net/manual/en/features.commandline.options.php). It will be used with files that have the “PHP”, “HTML”, or “HTML 5” syntax.
 
