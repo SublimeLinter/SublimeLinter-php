@@ -14,7 +14,6 @@ from SublimeLinter.lint import Linter, util
 
 
 class PHP(Linter):
-
     """Provides an interface to php -l."""
 
     syntax = ('php', 'html')
