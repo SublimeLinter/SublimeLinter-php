@@ -21,6 +21,7 @@ class PHP(Linter):
         r'^(?:Parse|Fatal) (?P<error>error):(\s*(?P<type>parse|syntax) error,?)?\s*'
         r'(?P<message>(?:unexpected \'(?P<near>[^\']+)\')?.*) in - on line (?P<line>\d+)'
     )
+    executable = 'php'
     error_stream = util.STREAM_STDOUT
 
     def split_match(self, match):
@@ -40,7 +41,7 @@ class PHP(Linter):
         if 'cmd' in settings:
             command = [settings.get('cmd')]
         else:
-            command = ['php']
+            command = [self.executable_path]
 
         command.append('-l')
         command.append('-n')
