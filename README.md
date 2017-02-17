@@ -16,6 +16,23 @@ In order for `php` to be executed by SublimeLinter, you must ensure that its pat
 
 Once `php` is installed and configured, you can proceed to install the SublimeLinter-php plugin if it is not yet installed.
 
+#### Specific Executable
+It is possible to specify the `php` executable that should be used to lint your code, taking precedence over the executable available in your PATH.
+
+##### Example:
+
+```json
+{
+    "SublimeLinter": {
+        "linters": {
+            "php": {
+                "cmd": "/path/to/php"
+            }
+        }
+    }
+}
+```
+
 ### Plugin installation
 Please use [Package Control](https://sublime.wbond.net/installation) to install the linter plugin. This will ensure that the plugin will be updated when new versions are available. If you want to install from source so you can modify the source code, you probably know what you are doing so we won’t cover that here.
 

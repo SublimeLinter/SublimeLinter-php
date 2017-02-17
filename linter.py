@@ -17,11 +17,11 @@ class PHP(Linter):
     """Provides an interface to php -l."""
 
     syntax = ('php', 'html')
-    cmd = 'php -l -n -d display_errors=On -d log_errors=Off'
     regex = (
         r'^(?:Parse|Fatal) (?P<error>error):(\s*(?P<type>parse|syntax) error,?)?\s*'
         r'(?P<message>(?:unexpected \'(?P<near>[^\']+)\')?.*) in - on line (?P<line>\d+)'
     )
+    executable = 'php'
     error_stream = util.STREAM_STDOUT
 
     def split_match(self, match):
@@ -33,3 +33,21 @@ class PHP(Linter):
             message = 'parse error'
 
         return match, line, col, error, warning, message, near
+
+    def cmd(self):
+        """Read cmd from inline settings."""
+        settings = Linter.get_view_settings(self)
+
+        if 'cmd' in settings:
+            command = [settings.get('cmd')]
+        else:
+            command = [self.executable_path]
+
+        command.append('-l')
+        command.append('-n')
+        command.append('-d')
+        command.append('display_errors=On')
+        command.append('-d')
+        command.append('log_errors=Off')
+
+        return command
