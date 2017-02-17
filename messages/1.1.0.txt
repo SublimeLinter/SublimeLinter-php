@@ -1,0 +1,14 @@
+SublimeLinter-php 1.1.0
+---------------------------
+
+This version adds support for declaring per-project linter executable files.
+
+{
+    "SublimeLinter": {
+        "linters": {
+            "php": {
+                "cmd": "/path/to/php"
+            }
+        }
+    }
+}
