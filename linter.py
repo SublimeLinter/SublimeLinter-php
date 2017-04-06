@@ -44,7 +44,8 @@ class PHP(Linter):
             command = [self.executable_path]
 
         command.append('-l')
-        command.append('-n')
+        command.append('-d')
+        command.append('error_reporting=-1')
         command.append('-d')
         command.append('display_errors=On')
         command.append('-d')
