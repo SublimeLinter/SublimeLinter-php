@@ -19,23 +19,6 @@ To install `php`, download and run the appropriate installer: [Linux/OS X](http:
 Please make sure that the path to `php` is available to SublimeLinter.
 The docs cover [troubleshooting PATH configuration](http://sublimelinter.com/en/latest/troubleshooting.html#finding-a-linter-executable).
 
-#### Specific Executable
-It is possible to specify the `php` executable that should be used to lint your code, taking precedence over the executable available in your PATH.
-
-##### Example:
-
-```json
-{
-    "SublimeLinter": {
-        "linters": {
-            "php": {
-                "cmd": "/path/to/php"
-            }
-        }
-    }
-}
-```
-
 
 ## Settings
 
