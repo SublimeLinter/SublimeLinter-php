@@ -10,7 +10,11 @@
 
 """This module exports the PHP plugin class."""
 
+import logging
 from SublimeLinter.lint import Linter, util
+
+
+logger = logging.getLogger('SublimeLinter.plugin.eslint')
 
 
 class PHP(Linter):
@@ -38,6 +42,8 @@ class PHP(Linter):
         settings = Linter.get_view_settings(self)
 
         if 'cmd' in settings:
+            logger.warning('The setting `cmd` has been deprecated. '
+                           'Use `executable` instead.')
             command = [settings.get('cmd')]
         else:
             command = ['php']
