@@ -20,7 +20,9 @@ logger = logging.getLogger('SublimeLinter.plugin.eslint')
 class PHP(Linter):
     """Provides an interface to php -l."""
 
-    syntax = ('php', 'html')
+    defaults = {
+        'selector': 'source.php, text.html.basic'
+    }
     regex = (
         r'^(?:Parse|Fatal) (?P<error>error):(\s*(?P<type>parse|syntax) error,?)?\s*'
         r'(?P<message>(?:unexpected \'(?P<near>[^\']+)\')?.*) (?:in - )?on line (?P<line>\d+)'
