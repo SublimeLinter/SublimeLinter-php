@@ -41,12 +41,10 @@ class PHP(Linter):
 
     def cmd(self):
         """Read cmd from inline settings."""
-        settings = Linter.get_view_settings(self)
-
-        if 'cmd' in settings:
+        if 'cmd' in self.settings:
             logger.warning('The setting `cmd` has been deprecated. '
                            'Use `executable` instead.')
-            command = [settings.get('cmd')]
+            command = [self.settings.get('cmd')]
         else:
             command = ['php']
 
