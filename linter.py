@@ -14,7 +14,20 @@ import logging
 from SublimeLinter.lint import Linter, util
 
 
-logger = logging.getLogger('SublimeLinter.plugin.eslint')
+logger = logging.getLogger('SublimeLinter.plugin.php')
+
+
+def _filter_message(message):
+    if not message:
+        message = 'parse error'
+    else:
+        message = message.replace('Standard input code', '')
+        message = message.replace(' on ', '')
+        message = message.replace(' in -', '')
+        message = message.replace(' in ', '')
+        message = message.strip()
+
+    return message
 
 
 class PHP(Linter):
@@ -24,20 +37,18 @@ class PHP(Linter):
         'selector': 'source.php, text.html.basic'
     }
     regex = (
-        r'^(?:Parse|Fatal) (?P<error>error):(\s*(?P<type>parse|syntax) error,?)?\s*'
-        r'(?P<message>(?:unexpected \'(?P<near>[^\']+)\')?.*) (?:in - )?on line (?P<line>\d+)'
+        r'^(?P<error>Parse|Fatal) error:\s*'
+        r'(?P<message>((?:parse|syntax) error,?)?\s*(?:unexpected \'(?P<near>[^\']+)\')?.*) '
+        r'(?:in - )?on line (?P<line>\d+)'
     )
     error_stream = util.STREAM_STDOUT
 
     def split_match(self, match):
         """Return the components of the error."""
-        match, line, col, error, warning, message, near = super().split_match(match)
+        result = super().split_match(match)
+        result['message'] = _filter_message(result.message)
 
-        # message might be empty, we have to supply a value
-        if match and match.group('type') == 'parse' and not message:
-            message = 'parse error'
-
-        return match, line, col, error, warning, message, near
+        return result
 
     def cmd(self):
         """Read cmd from inline settings."""
