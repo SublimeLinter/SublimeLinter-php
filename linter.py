@@ -46,12 +46,9 @@ class PHP(Linter):
     def split_match(self, match):
         """Return the components of the error."""
         result = super().split_match(match)
+        result['message'] = _filter_message(result.message)
 
-        match, line, col, error, warning, message, near = result
-
-        message = _filter_message(message)
-
-        return match, line, col, error, warning, message, near
+        return result
 
     def cmd(self):
         """Read cmd from inline settings."""

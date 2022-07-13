@@ -3,28 +3,38 @@ import unittest
 import re
 import importlib
 
+import sublime
+
 # Damn you dash separated module names!!!
 LinterModule = importlib.import_module('SublimeLinter-php.linter')
 Linter = LinterModule.PHP
-_filter_message = LinterModule._filter_message
 regex = Linter.regex
 
 
 class TestRegex(unittest.TestCase):
 
-    def assertMatch(self, string, expected):
+    def splitMatch(self, string):
+        linter = Linter(sublime.View(0), {})
         match = re.match(regex, string)
-        self.assertIsNotNone(match)
 
-        # Hack to test message filtering.
-        actual = match.groupdict()
-        if 'message' in actual:
-            actual['message'] = _filter_message(actual['message'])
+        if match is None:
+            return None
 
-        self.assertEqual(actual, expected)
+        match = linter.split_match(match)
+
+        return {
+            'error': match['error'],
+            'line': match['line'],
+            'message': match['message'],
+            'near': match['near'],
+        }
+
+
+    def assertMatch(self, string, expected):
+        self.assertEqual(self.splitMatch(string), expected)
 
     def assertNoMatch(self, string):
-        self.assertIsNone(re.match(regex, string))
+        self.assertIsNone(self.splitMatch(string))
 
     def test_no_errors(self):
         self.assertNoMatch('No syntax errors detected in - ')
@@ -34,9 +44,9 @@ class TestRegex(unittest.TestCase):
 
     def test_errors(self):
         self.assertMatch(
-            'Parse error: syntax error, unexpected \'$this\' (T_VARIABLE) in - on line 14', {
+            'Parse error: syntax error, unexpected \'$this\' (T_VARIABLE) on line 14', {
                 'error': 'Parse',
-                'line': '14',
+                'line': 13,
                 'message': 'syntax error, unexpected \'$this\' (T_VARIABLE)',
                 'near': '$this'
                 })
@@ -44,7 +54,7 @@ class TestRegex(unittest.TestCase):
         self.assertMatch(
             'Parse error: syntax error, unexpected end of file in - on line 23', {
                 'error': 'Parse',
-                'line': '23',
+                'line': 22,
                 'message': 'syntax error, unexpected end of file',
                 'near': None
                 })
@@ -53,7 +63,7 @@ class TestRegex(unittest.TestCase):
         self.assertMatch(
             'Parse error: syntax error, unexpected \'endwhile\' (T_ENDWHILE), expecting end of file in Standard input code on line 16', {
                 'error': 'Parse',
-                'line': '16',
+                'line': 15,
                 'message': 'syntax error, unexpected \'endwhile\' (T_ENDWHILE), expecting end of file',
                 'near': 'endwhile'
                 })
@@ -61,7 +71,7 @@ class TestRegex(unittest.TestCase):
         self.assertMatch(
             'Parse error: parse error in - on line 16', {
                 'error': 'Parse',
-                'line': '16',
+                'line': 15,
                 'message': 'parse error',
                 'near': None
                 })
