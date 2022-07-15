@@ -1,0 +1,14 @@
+SublimeLinter-php 1.4.0
+-----------------------
+
+The 'cmd' setting has finally been removed. As a reminder: the new name for the same thing is 'executable' which is also the common name for all linters in SublimeLinter land.
+
+{
+    "SublimeLinter": {
+        "linters": {
+            "php": {
+                "executable": "/path/to/php"
+            }
+        }
+    }
+}
