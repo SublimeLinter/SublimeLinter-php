@@ -29,34 +29,42 @@ class TestRegex(unittest.TestCase):
 
     def test_errors(self):
         self.assertMatch(
-            'Parse error: syntax error, unexpected \'$this\' (T_VARIABLE) on line 14', {
+            'Parse error: syntax error, unexpected \'$this\' (T_VARIABLE) on line 14',
+            {
                 'error': 'Parse',
                 'line': 13,
                 'message': 'syntax error, unexpected \'$this\' (T_VARIABLE)',
-                'near': '$this'
-                })
+                'near': '$this',
+            },
+        )
 
         self.assertMatch(
-            'Parse error: syntax error, unexpected end of file in - on line 23', {
+            'Parse error: syntax error, unexpected end of file in - on line 23',
+            {
                 'error': 'Parse',
                 'line': 22,
                 'message': 'syntax error, unexpected end of file',
-                'near': None
-                })
+                'near': None,
+            },
+        )
 
     def test_issue_29(self):
         self.assertMatch(
-            'Parse error: syntax error, unexpected \'endwhile\' (T_ENDWHILE), expecting end of file in Standard input code on line 16', {
+            'Parse error: syntax error, unexpected \'endwhile\' (T_ENDWHILE), expecting end of file in Standard input code on line 16',
+            {
                 'error': 'Parse',
                 'line': 15,
                 'message': 'syntax error, unexpected \'endwhile\' (T_ENDWHILE), expecting end of file',
-                'near': 'endwhile'
-                })
+                'near': 'endwhile',
+            },
+        )
 
         self.assertMatch(
-            'Parse error: parse error in - on line 16', {
+            'Parse error: parse error in - on line 16',
+            {
                 'error': 'Parse',
                 'line': 15,
                 'message': 'parse error',
-                'near': None
-                })
+                'near': None,
+            },
+        )
