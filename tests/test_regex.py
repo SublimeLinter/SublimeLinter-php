@@ -1,40 +1,25 @@
-# flake8: noqa
 import unittest
-import re
 import importlib
 
 import sublime
 
-# Damn you dash separated module names!!!
+
 LinterModule = importlib.import_module('SublimeLinter-php.linter')
 Linter = LinterModule.PHP
-regex = Linter.regex
 
 
 class TestRegex(unittest.TestCase):
-
-    def splitMatch(self, string):
-        linter = Linter(sublime.View(0), {})
-        match = re.match(regex, string)
-
-        if match is None:
-            return None
-
-        match = linter.split_match(match)
-
-        return {
-            'error': match['error'],
-            'line': match['line'],
-            'message': match['message'],
-            'near': match['near'],
-        }
-
-
     def assertMatch(self, string, expected):
-        self.assertEqual(self.splitMatch(string), expected)
+        linter = Linter(sublime.View(0), {})
+        actual = list(linter.find_errors(string))[0]
+        # `find_errors` fills out more information we don't want to write down
+        # in the examples
+        self.assertEqual({k: actual[k] for k in expected.keys()}, expected)
 
     def assertNoMatch(self, string):
-        self.assertIsNone(self.splitMatch(string))
+        linter = Linter(sublime.View(0), {})
+        actual = list(linter.find_errors(string))
+        self.assertFalse(actual)
 
     def test_no_errors(self):
         self.assertNoMatch('No syntax errors detected in - ')
