@@ -50,7 +50,8 @@ class TestRegex(unittest.TestCase):
 
     def test_issue_29(self):
         self.assertMatch(
-            'Parse error: syntax error, unexpected \'endwhile\' (T_ENDWHILE), expecting end of file in Standard input code on line 16',
+            'Parse error: syntax error, unexpected \'endwhile\' (T_ENDWHILE), '
+            'expecting end of file in Standard input code on line 16',
             {
                 'error': 'Parse',
                 'line': 15,
