@@ -34,7 +34,7 @@ class PHP(Linter):
     """Provides an interface to php -l."""
 
     defaults = {
-        'selector': 'embedding.php, text.html.php, source.php, text.html.basic'
+        'selector': 'embedding.php, source.php'
     }
     regex = (
         r'^(?P<error>Parse|Fatal) error:\s*'
