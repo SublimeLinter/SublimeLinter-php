@@ -69,3 +69,36 @@ class TestRegex(unittest.TestCase):
                 'near': None,
             },
         )
+
+    def test_issue_55_message_filter_only_strips_trailing_source(self):
+        # " on " and " in " inside the message must survive
+        self.assertMatch(
+            'Fatal error: Cannot use isset() on the result of an expression '
+            '(you can use "null !== expression" instead) in Standard input code on line 2',
+            {
+                'error': 'Fatal',
+                'line': 1,
+                'message': 'Cannot use isset() on the result of an expression '
+                           '(you can use "null !== expression" instead)',
+            },
+        )
+
+        self.assertMatch(
+            "Fatal error: 'break' not in the 'loop' or 'switch' context "
+            'in Standard input code on line 3',
+            {
+                'error': 'Fatal',
+                'line': 2,
+                'message': "'break' not in the 'loop' or 'switch' context",
+            },
+        )
+
+        self.assertMatch(
+            'Fatal error: Cannot redeclare f() (previously declared in Standard input code:2) '
+            'in Standard input code on line 3',
+            {
+                'error': 'Fatal',
+                'line': 2,
+                'message': 'Cannot redeclare f() (previously declared in Standard input code:2)',
+            },
+        )
