@@ -40,7 +40,11 @@ class PHP(Linter):
     }
     regex = (
         r'^(?P<error>Parse|Fatal) error:\s*'
-        r'(?P<message>((?:parse|syntax) error,?)?\s*(?:unexpected \'(?P<near>[^\']+)\')?.*) '
+        # PHP 7 quotes the token with single quotes (`unexpected 'foo'`), PHP 8
+        # with double quotes and a description (`unexpected token ";"`,
+        # `unexpected identifier "foo"`).
+        r'(?P<message>((?:parse|syntax) error,?)?\s*'
+        r'(?:unexpected (?:[a-z-]+(?: [a-z-]+)* )?(?P<quote>["\'])(?P<near>.+?)(?P=quote))?.*) '
         r'(?:in - )?on line (?P<line>\d+)'
     )
     error_stream = util.STREAM_STDOUT
