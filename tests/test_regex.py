@@ -144,6 +144,12 @@ class TestRegex(unittest.TestCase):
         )
 
         self.assertMatch(
+            'Parse error: syntax error, unexpected double-quoted string "a\'b", '
+            'expecting "," or ";" in Standard input code on line 1',
+            {'error': 'Parse', 'line': 0, 'near': "a'b"},
+        )
+
+        self.assertMatch(
             'Parse error: syntax error, unexpected end of file in Standard input code on line 3',
             {
                 'error': 'Parse',

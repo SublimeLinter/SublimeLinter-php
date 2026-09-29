@@ -44,7 +44,7 @@ class PHP(Linter):
         # with double quotes and a description (`unexpected token ";"`,
         # `unexpected identifier "foo"`).
         r'(?P<message>((?:parse|syntax) error,?)?\s*'
-        r'(?:unexpected (?:[a-z-]+(?: [a-z-]+)* )?["\'](?P<near>[^"\']+)["\'])?.*) '
+        r'(?:unexpected (?:[a-z-]+(?: [a-z-]+)* )?(?P<quote>["\'])(?P<near>.+?)(?P=quote))?.*) '
         r'(?:in - )?on line (?P<line>\d+)'
     )
     error_stream = util.STREAM_STDOUT
