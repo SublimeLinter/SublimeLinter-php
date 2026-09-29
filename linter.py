@@ -11,21 +11,23 @@
 """This module exports the PHP plugin class."""
 
 import logging
+import re
 from SublimeLinter.lint import Linter, util
 
 
 logger = logging.getLogger('SublimeLinter.plugin.php')
+
+# PHP appends where it read the code from, e.g. `... in Standard input code`
+# or `... in -`. Only that trailing part is noise; ` in ` and ` on ` inside the
+# message itself (`Cannot use isset() on the result of an expression`) are not.
+TRAILING_SOURCE_RE = re.compile(r'\s+in\s+(?:Standard input code|-)\s*$')
 
 
 def _filter_message(message):
     if not message:
         message = 'parse error'
     else:
-        message = message.replace('Standard input code', '')
-        message = message.replace(' on ', '')
-        message = message.replace(' in -', '')
-        message = message.replace(' in ', '')
-        message = message.strip()
+        message = TRAILING_SOURCE_RE.sub('', message).strip()
 
     return message
 
