@@ -102,3 +102,53 @@ class TestRegex(unittest.TestCase):
                 'message': 'Cannot redeclare f() (previously declared in Standard input code:2)',
             },
         )
+
+    def test_issue_56_php8_quoted_tokens(self):
+        # PHP 8 writes `unexpected token ";"`, `unexpected identifier "bar"`, ...
+        self.assertMatch(
+            'Parse error: syntax error, unexpected token ";", expecting "]" '
+            'in Standard input code on line 2',
+            {
+                'error': 'Parse',
+                'line': 1,
+                'message': 'syntax error, unexpected token ";", expecting "]"',
+                'near': ';',
+            },
+        )
+
+        self.assertMatch(
+            'Parse error: syntax error, unexpected identifier "bar" in Standard input code on line 2',
+            {
+                'error': 'Parse',
+                'line': 1,
+                'message': 'syntax error, unexpected identifier "bar"',
+                'near': 'bar',
+            },
+        )
+
+        self.assertMatch(
+            'Parse error: syntax error, unexpected variable "$y" in Standard input code on line 2',
+            {'error': 'Parse', 'line': 1, 'near': '$y'},
+        )
+
+        self.assertMatch(
+            'Parse error: syntax error, unexpected integer "2", expecting "," or ";" '
+            'in Standard input code on line 2',
+            {'error': 'Parse', 'line': 1, 'near': '2'},
+        )
+
+        self.assertMatch(
+            'Parse error: syntax error, unexpected double-quoted string "def" '
+            'in Standard input code on line 2',
+            {'error': 'Parse', 'line': 1, 'near': 'def'},
+        )
+
+        self.assertMatch(
+            'Parse error: syntax error, unexpected end of file in Standard input code on line 3',
+            {
+                'error': 'Parse',
+                'line': 2,
+                'message': 'syntax error, unexpected end of file',
+                'near': None,
+            },
+        )
